@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My First Site</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello, World!</h1>
+  <p>This is my first website!</p>
+  <button id="myButton">Click Me</button>
+
+  <script>
+    const button = document.getElementById("myButton");
+    button.addEventListener("click", function() {
+      alert("Button was clicked!");
+    });
+  </script>
+</body>
+</html>
