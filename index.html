@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My First Site</title>
+  <title>My Page</title>
   <style>
+    /* CSS goes here */
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #e0e0e0;
-      font-family: Arial, sans-serif;
+      background-color: lightblue;
+    }
+    h1 {
+      color: red;
     }
   </style>
 </head>
 <body>
-  <h1>Noah Richards</h1><\n>
-  <p>I am Noah and I made this website!</p>
+  <!-- HTML goes here -->
+  <h1>Hello World!</h1>
+  <button id="btn">Click me</button>
+
+  <script>
+    // JS goes here
+    let button = document.getElementById("btn");
+    button.onclick = function() {
+      alert("You clicked!");
+    }
+  </script>
 </body>
 </html>
