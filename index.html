@@ -1,195 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Noah's Calculator</title>
+    <title>First on mac</title>
     <style>
+        body, html {
+            background-color: #37353E;
+        }
         body {
             text-align: center;
-            background-color: #2C3333;
         }
-        html, body {
-            height: 100%;
-            margin: 0;
-            background-color: #2C3333; /* your chosen background */
-        }
-        input {
-            width: 700px;
-            outline: none;
-            border: none;
-            background-color: transparent;
-            color: #E7F6F2;
-            font-size: 50px;
-            text-align: center;
-            margin: 50px;
-        }
-        .row {
+        .container {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 10px;
+            flex-direction: column;
+            align-items: center;
         }
-        .buttons {
-            width: 100px;
-            height: 100px;
-            border: none;
-            background-color: #395B64;
-            border-radius: 10px;
-            color: #E7F6F2;
-            font-size: 50px;
+        #ent-use-pass {
+            color: #D3DAD9;
         }
-        .buttons:hover {
-            transform: scale(1.05);
-            background-color: #35535c;
+        .text-in {
+            margin-bottom: 4px;
+            width: 200px;
         }
-
     </style>
 </head>
-    <body>
-        <input type="number" id="num-input">
-    <button class="buttons" id="clear">Clr</button>
+<body>
+<div class="container">
+    <h1 id="ent-use-pass">Enter Username and Password</h1>
+    <input class="text-in" type="text" id="username" placeholder="Username">
+    <input class="text-in" type="text" id="password" placeholder="Password">
+    <button class="buttons" id="submit">Submit</button>
+</div>
+<script>
+    let ButtonSubmit = document.getElementById('submit');
 
-    <div class="row">
-        <button class="buttons" id="Button1">1</button>
-        <button class="buttons" id="Button2">2</button>
-        <button class="buttons" id="Button3">3</button>
-        <button class="buttons" id="ButtonPlus">+</button>
-    </div>
+    let InputUserName = document.getElementById('username');
+    let InputPassword = document.getElementById('password');
 
-    <div class="row">
-        <button class="buttons" id="Button4">4</button>
-        <button class="buttons" id="Button5">5</button>
-        <button class="buttons" id="Button6">6</button>
-        <button class="buttons" id="ButtonMinus">-</button>
-    </div>
-    <div class="row">
-        <button class="buttons" id="Button7">7</button>
-        <button class="buttons" id="Button8">8</button>
-        <button class="buttons" id="Button9">9</button>
-        <button class="buttons" id="ButtonMult">x</button>
-    </div>
-    <div class="row">
-        <button class="buttons" id="ButtonDot">.</button>
-        <button class="buttons" id="Button0">0</button>
-        <button class="buttons" id="ButtonEqual">=</button>
-        <button class="buttons" id="ButtonDiv">/</button>
-    </div>
-    <script>
-        let Button1 = document.getElementById("Button1");
-        let Button2 = document.getElementById("Button2");
-        let Button3 = document.getElementById("Button3");
-        let ButtonPlus = document.getElementById("ButtonPlus");
-        let Button4 = document.getElementById("Button4");
-        let Button5 = document.getElementById("Button5");
-        let Button6 = document.getElementById("Button6");
-        let ButtonMinus = document.getElementById("ButtonMinus");
-        let Button7 = document.getElementById("Button7");
-        let Button8 = document.getElementById("Button8");
-        let Button9 = document.getElementById("Button9");
-        let ButtonMult = document.getElementById("ButtonMult");
-        let ButtonDot = document.getElementById("ButtonDot");
-        let Button0 = document.getElementById("Button0");
-        let ButtonEqual = document.getElementById("ButtonEqual");
-        let ButtonDiv = document.getElementById("ButtonDiv");
+    let RealSignIns = {
+        "admin1":"admin"
+    };
 
-        let NumInput = document.getElementById("num-input");
+    document.addEventListener("DOMContentLoaded", () => {
+        if (localStorage.getItem('username') === "true") {
+            GoToHomepage()
+        }
+    })
 
-        let ButtonClear = document.getElementById("clear");
+    function GoToHomepage() {
+        window.location.href = "homepage.html";
+    }
 
-        let first_num = null;
-        let second_num = null;
-        let operation = null;
+    ButtonSubmit.addEventListener("click", () => {
+        let TypedUserName = InputUserName.value;
+        let TypedPassword = InputPassword.value;
 
-        ButtonClear.addEventListener("click", function () {
-            first_num = null;
-            second_num = null;
-            operation = null;
-            NumInput.value = "";
-        })
 
-        Button1.addEventListener("click", function () {
-            NumInput.value += "1";
-        });
-        Button2.addEventListener("click", function () {
-            NumInput.value += "2";
-        });
-        Button3.addEventListener("click", function () {
-            NumInput.value += "3";
-        });
-        Button4.addEventListener("click", function () {
-            NumInput.value += "4";
-        });
-        Button5.addEventListener("click", function () {
-            NumInput.value += "5";
-        });
-        Button6.addEventListener("click", function () {
-            NumInput.value += "6";
-        });
-        Button7.addEventListener("click", function () {
-            NumInput.value += "7";
-        });
-        Button8.addEventListener("click", function () {
-            NumInput.value += "8";
-        });
-        Button9.addEventListener("click", function () {
-            NumInput.value += "9";
-        });
-        Button0.addEventListener("click", function () {
-            NumInput.value += "0";
-        });
-        ButtonDot.addEventListener("click", function () {
-            NumInput.value += ".";
-        });
-
-        ButtonPlus.addEventListener("click", function () {
-            if (first_num == null) {
-                first_num = NumInput.value;
-                NumInput.value = "";
-                operation = "plus";
+        if (RealSignIns[TypedUserName] !== undefined) {
+            if (RealSignIns[TypedUserName] === TypedPassword) {
+                //localStorage.setItem("signedIn", "true")
+                GoToHomepage()
             }
-        });
-        ButtonMinus.addEventListener("click", function () {
-            if (first_num == null) {
-                first_num = NumInput.value;
-                NumInput.value = "";
-                operation = "minus";
+            if (RealSignIns[TypedUserName] !== TypedPassword) {
+                alert("Incorrect Password : " + TypedPassword);
             }
-        });
-        ButtonMult.addEventListener("click", function () {
-            if (first_num == null) {
-                first_num = NumInput.value;
-                NumInput.value = "";
-                operation = "mult";
-            }
-        });
-        ButtonDiv.addEventListener("click", function () {
-            if (first_num == null) {
-                first_num = NumInput.value;
-                NumInput.value = "";
-                operation = "div";
-            }
-        });
+        }
+        if (RealSignIns[TypedUserName] === undefined) {
+            alert("Username does not exist")
+        }
+    });
 
-        ButtonEqual.addEventListener("click", function () {
-            let answer = null;
-            second_num = NumInput.value;
-            if (first_num != null) {
-                if (operation === "plus") {
-                    answer = parseFloat(first_num) + parseFloat(second_num);
-                }
-                if (operation === "minus") {
-                    answer = parseFloat(first_num) - parseFloat(second_num);
-                }
-                if (operation === "mult") {
-                    answer = parseFloat(first_num) * parseFloat(second_num);
-                }
-                if (operation === "div") {
-                    answer = parseFloat(first_num) / parseFloat(second_num);
-                }
-                NumInput.value = answer;
-                first_num = null;
-                second_num = null;
-            }
-        });
-    </script>
-    </body>
+
+</script>
+</body>
 </html>
