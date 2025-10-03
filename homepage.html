@@ -12,6 +12,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('signedIn') !== "true") {
                 Main.style.visibility = 'hidden';
+                window.location.href = "index.html";
             }
        });
     </script>
