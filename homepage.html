@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="main">
 <head>
     <title>Homepage</title>
 </head>
 <body>
     <h1>Signed In!</h1>
+
+    <script>
+        let Main = document.getElementById('main');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('signedIn') !== "true") {
+                Main.style.visibility = 'hidden';
+            }
+       });
+    </script>
 </body>
 </html>
