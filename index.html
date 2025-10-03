@@ -6,9 +6,6 @@
         body, html {
             background-color: #37353E;
         }
-        body {
-            text-align: center;
-        }
         .container {
             display: flex;
             flex-direction: column;
@@ -57,7 +54,7 @@
 
         if (RealSignIns[TypedUserName] !== undefined) {
             if (RealSignIns[TypedUserName] === TypedPassword) {
-                //localStorage.setItem("signedIn", "true")
+                localStorage.setItem("signedIn", "true")
                 GoToHomepage()
             }
             if (RealSignIns[TypedUserName] !== TypedPassword) {
