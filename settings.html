@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <style>
+        body, html {
+            background-color: #37353E;
+        }
+        .container {
+            display: flex;
+            height: 70vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #ButtonLogOut {
+            width: 30vw;
+            height: 10vw;
+            background-color: #62A388;
+            border: none;
+            outline: none;
+            color: #D3DAD9;
+            font: 4vh 'Segoe UI';
+            font-weight: 700;
+        }
+        #ButtonLogOut:hover {
+            background-color: #ff0000;
+        }
+        #ButtonBack {
+
+            background: none;
+            border: none;
+        }
+        #ImgBackIcon {
+            width: 5vw;
+        }
+    </style>
+</head>
+<body>
+    <button id="ButtonBack"><img id="ImgBackIcon" src="BackIcon.png"></button>
+    <div class="container">
+        <button id="ButtonLogOut">Log Out</button>
+    </div>
+<script>
+    //startup check -- IGNORE
+
+    let Main = document.getElementById('main');
+
+    //enforce signing in
+    document.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('signedIn') !== "true") {
+            Main.style.visibility = 'hidden';
+            window.location.href = 'index.html';
+        }
+    });
+
+    //end of startup check
+
+    const ButtonBack = document.getElementById('ButtonBack');
+    const ButtonLogOut = document.getElementById('ButtonLogOut');
+
+    ButtonBack.addEventListener('click', () => {
+        window.location.href = 'index.html';
+    })
+    ButtonLogOut.addEventListener('click', () => {
+        localStorage.removeItem('signedIn');
+        window.location.href = 'index.html';
+    })
+</script>
+</body>
+</html>
