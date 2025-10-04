@@ -2,19 +2,230 @@
 <html lang="en" id="main">
 <head>
     <title>Homepage</title>
+    <style>
+        body, html {
+            background-color: #37353E;
+        }
+        .container {
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "main sidebar";
+            grid-template-columns: 1fr 20vw;
+            grid-template-rows: 10vh 1fr;
+        }
+        .header {
+            grid-area: header;
+            display: flex;
+            border: 1px solid black;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar
+        {
+            grid-area: sidebar;
+            height: 87vh;
+            display: grid;
+            grid-template-areas:
+            "new-side"
+            "trending-side";
+            grid-template-rows: 1fr 1fr;
+            border: 1px solid black;
+            justify-content: center;
+        }
+        .main
+        {
+            grid-area: main;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid black;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #settings-button {
+            margin-right: auto;
+            background: none;
+            border: none;
+
+        }
+        #settings-icon {
+
+            width: 3vw;
+            height: auto;
+        }
+        #main-title {
+            color: #D3DAD9;
+            margin-right: auto;
+            font: 5vh "Segoe UI";
+            font-weight: 700;
+        }
+        #search-box {
+            background-color: #44444E;
+            width: 15vw;
+            height: 2vw;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            color: #D3DAD9;
+            font-size: 1.5vw;
+        }
+        .labels {
+            color : #D3DAD9;
+            margin-top: 1vh;
+            font: 5vh "Segoe UI";
+            font-weight: 700;
+        }
+        .articleButtons {
+            width: 40vw;
+            height: 10vw;
+            background-color: #62A388;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            color: #D3DAD9;
+            font: 4vh 'Segoe UI';
+            font-weight: 700;
+            border-radius: 10px;
+            margin: 3px;
+        }
+        #title {
+            color: #D3DAD9;
+            font: 5vh 'Segoe UI';
+            font-weight: 700;
+        }
+        #storyContent {
+            color: #D3DAD9;
+            font: 2vh 'Segoe UI';
+            font-weight: 700;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+        .articleFullDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #backButton {
+            position: absolute;
+            top: 14vh;
+            left: 20px;
+            width: 25vw;
+            height: 5vw;
+            background-color: #62A388;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            color: #D3DAD9;
+            font: 4vh 'Segoe UI';
+            font-weight: 700;
+            border-radius: 10px;
+            margin-right: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Signed In!</h1>
+    <div class="container">
+        <header class="header">
+            <button id="settings-button"><img id="settings-icon" src="output-onlinepngtools.png"></button>
+            <h1 id="main-title">The home for coverage of all FHC athletics</h1>
+            <input type="text" id ="search-box" placeholder="Search">
+        </header>
+        <aside class="sidebar">
+            <div class="new-side">
+                <h1 class="labels">New</h1>
+                coming soon
+            </div>
+            <div class="trending-side">
+                <h1 class="labels">Trending</h1>
+                coming soon
+            </div>
+        </aside>
+        <main class="main" id="articles">
+
+        </main>
+    </div>
 
     <script>
+        //startup check -- IGNORE
+
         let Main = document.getElementById('main');
 
+        //enforce signing in
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('signedIn') !== "true") {
                 Main.style.visibility = 'hidden';
-                window.location.href = "index.html";
+                window.location.href = 'index.html';
             }
        });
+
+        //end of startup check
+
+        //handle settings button to new html file
+
+        const ButtonSettings = document.getElementById('settings-button');
+
+        ButtonSettings.addEventListener('click', () => {
+            window.location.href = 'settings.html';
+        })
+
+        const stories = [
+            {title:"Q&A with Grayson Porter", content:"This is testing the contenet system, this will actiually work eventually fdkjlfjsdklfjsdajfklsdajdhjskahdjksajdksaJKLDFSAjklfhjkdalsfhjklasdhfjklsahjdhsajkldhasjkdhjksahdkj"},
+            {title:"Q&A with Noah Richards", content:"dflsdfdfdf=dfdfdsfjdshfjdsahjfhdskajlfhjkdsahjfkldsj"}
+        ];
+
+        function RenderStories(){
+            const container = document.getElementById('articles');
+            container.innerHTML = '';
+            stories.forEach(stories => {
+                const div = document.createElement('div');
+                div.className = "article";
+
+                const btn = document.createElement('button');
+                btn.textContent = stories.title;
+                btn.className = "articleButtons";
+                btn.addEventListener("click", () => {
+                    RenderStoryFullWords(stories.title, stories.content);
+                })
+                div.appendChild(btn);
+
+                container.appendChild(div);
+            });
+        }
+
+        function RenderStoryFullWords(title, content){
+            const container = document.getElementById('articles');
+            container.innerHTML = '';
+
+            const div = document.createElement('div');
+            div.className = "articleFullDiv";
+
+            const heading = document.createElement("h1");
+            heading.id = "title";
+            heading.textContent = title;
+            div.appendChild(heading)
+
+            const storyContent = document.createElement("p");
+            storyContent.id = "storyContent";
+            storyContent.textContent = content;
+            div.appendChild(storyContent)
+
+            const backButton = document.createElement("button");
+            backButton.id = "backButton";
+            backButton.textContent = "Back";
+            backButton.addEventListener("click", () => {
+                RenderStories();
+            })
+            div.appendChild(backButton)
+
+            container.appendChild(div);
+
+            addEventListener('click', () => {
+
+            })
+
+        }
+        RenderStories();
+
     </script>
 </body>
 </html>
